@@ -1,0 +1,141 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+ <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            color:red;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background-color: white;
+        }
+
+        td {
+            font-size: 14px;
+            color: #333;
+        }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: black;
+    margin: 40px;
+    color: #2c3e50;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.blog-cards_container {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: yellow;
+    
+    gap: 20px;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.blog-card {
+    background-color: pink;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px 25px;
+    flex: 1 1 300px;  /* responsive width, minimum 300px */
+    max-width: 350px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+}
+
+.blog-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #34495e;
+}
+
+.blog-content {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+    flex-grow: 1;
+}
+.right-button {
+      float: right; /* Pushes the button to the right */
+      margin: 20px;  /* Adds some spacing around the button */
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: aquamarine;
+      
+    }
+    </style>
+</head>
+<body>
+    
+ <div>
+        <button class= "right-button"><a href="{% url 'createblog' %}"> Create New blog</a></button>
+    </div>
+    <h2>Latest Blogs</h2>
+   
+    <div class="blog-cards_container">
+        {% for blog in blogs %}
+         {{ bolg.title }}   
+        <div class="blog-card">
+            <a href="{% url 'blogdetail' blog.id %}"> {{ blog.title }}   </a>  
+        
+<div class="blog-content">{{ blog.description }}</div>
+{% if blog.blog_image %}
+        <img src="{{blog.blog_image.url}}" alt="">
+        {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
+
+
+</body>
+</html>
