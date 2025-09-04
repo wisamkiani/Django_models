@@ -62,7 +62,7 @@ h2 {
 .blog-cards_container {
     display: flex;
     flex-wrap: wrap;
-    background-color: yellow;
+    background-color: black;
     
     gap: 20px;
     justify-content: center;
@@ -71,7 +71,7 @@ h2 {
 }
 
 .blog-card {
-    background-color: pink;
+    background-image: linear-gradient(red, green, blue);
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     padding: 20px 25px;
@@ -121,7 +121,7 @@ h2 {
    
     <div class="blog-cards_container">
         {% for blog in blogs %}
-         {{ bolg.title }}   
+         
         <div class="blog-card">
             <a href="{% url 'blogdetail' blog.id %}"> {{ blog.title }}   </a>  
         
@@ -129,6 +129,8 @@ h2 {
 {% if blog.blog_image %}
         <img src="{{blog.blog_image.url}}" alt="">
         {% endif %}
+        <button class="blue-button"><a href="{% url 'updateblog' blog.id %}"> Update</a></button>
+        <button class="blue-button"><a href="{% url 'deleteblog' blog.id %}"> Delete</a></button>
         </div>
         {% endfor %}
     </div>
@@ -137,5 +139,4 @@ h2 {
 
 
 
-</body>
-</html>
+

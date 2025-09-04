@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect 
+from django.shortcuts import render,redirect
 from django.views import View
 from.models import Blog
 
@@ -90,23 +90,51 @@ class CreateBlogView(View):
             print(request.POST)
             titles = request.POST.get('title')
             descriptions = request.POST.get('description')
-            blog_images = request.FILES.get('blog_image')
+            blog_image = request.FILES.get('blog_image')
 
 
             print(titles, 123455654443)
             print(descriptions,5555555555333)
-            print(blog_images, 453454365934)
+            print(blog_image, 453454365934)
 
             Blog.objects.create(
                 title = titles,
                 description = descriptions,
-                blog_image = blog_images
+                blog_image = blog_image,
             )
             return redirect('dashboard')
-            return render(request, 'create_blog.html')
+            # return render(request, 'create_blog.html')
     
 
 
+class EditBlogView(View):
+  def get(self, request, *args, **kwargs):
+        id = kwargs.get('id')
+        blog = Blog.objects.filter(id=id).first()
+        context = {
+            'blog' : blog
+        }
+        return render(request, 'editblog.html', context)
+  
+  def post(self, request, *args, **kwargs):
+        id = kwargs.get('id')
+        titles = request.POST.get('title')
+        descriptions = request.POST.get('description')
+        blog_images = request.FILES.get('blog_image')
+        print(blog_images)
+        blog = Blog.objects.filter(id=id).first()
+        blog.title = titles
+        blog.description = descriptions
+        if blog_images:
+            blog.blog_image = blog_images
+        blog.save()
+
+        return redirect ('dashboard')
 
 
-
+def delete_blog(request, *args, **kwargs):
+    id = kwargs.get('id')
+    blog = Blog.objects.filter(id=id).first()
+    if blog:
+        blog.delete()
+        return redirect('dashboard')
